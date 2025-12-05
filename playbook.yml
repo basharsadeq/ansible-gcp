@@ -4,7 +4,6 @@
   gather_facts: no
 
   tasks:
-
     - name: Create VM in GCP
       google.cloud.gcp_compute_instance:
         auth_kind: serviceaccount
