@@ -8,7 +8,7 @@
     vm_name: "jenkins-ansible-vm"      # VM name
     machine_type: "e2-micro"           # VM type
     disk_image: "projects/debian-cloud/global/images/family/debian-12"  # OS image
-    ansible_gcp: "/var/lib/jenkins/credentials/ansible-gcp.json"  # service account
+    ansible_gcp: "/var/lib/jenkins/credentials/ansible-gcp.json"  # service account JSON
 
   tasks:
     - name: Create VM in GCP
@@ -25,7 +25,7 @@
             initialize_params:
               source_image: "{{ disk_image }}"
         network_interfaces:
-          - network: "default"
+          - network: "global/networks/default"
             access_configs:
               - name: "External NAT"
                 type: "ONE_TO_ONE_NAT"
