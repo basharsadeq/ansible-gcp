@@ -7,7 +7,7 @@
     - name: Create VM in GCP
       google.cloud.gcp_compute_instance:
         auth_kind: serviceaccount
-        service_account_file: "{{ ansible_gcp }}"
+        service_account_file: "{{ lookup('env', 'ANSIBLE_GCP') }}"
         project: "qwiklabs-gcp-00-29279b6605f5"
         zone: "us-central1-a"
         name: "jenkins-ansible-vm"
