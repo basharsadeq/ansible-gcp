@@ -9,7 +9,7 @@
       google.cloud.gcp_compute_instance:
         auth_kind: serviceaccount
         service_account_file: "{{ lookup('env', 'ansible-gcp') }}"
-        project: "qwiklabs-gcp-00-29279b6605f5"
+        project: "YOUR_PROJECT_ID"
         zone: "us-central1-a"
         name: "jenkins-ansible-vm"
         machine_type: "e2-micro"
@@ -19,8 +19,9 @@
             initialize_params:
               source_image: "projects/debian-cloud/global/images/family/debian-12"
         network_interfaces:
-          - network: default
-            access_configs: [{}]
+          - network: "global/networks/default"
+            access_configs:
+              - {}
       register: vm
 
     - name: Show VM info
