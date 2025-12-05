@@ -1,18 +1,24 @@
-- name: Create VM in GCP
-  google.cloud.gcp_compute_instance:
-    auth_kind: serviceaccount
-    service_account_file: "{{ ansible_gcp }}"
-    project: "qwiklabs-gcp-00-29279b6605f5"
-    zone: "us-central1-a"
-    name: "jenkins-ansible-vm"
-    machine_type: "e2-micro"
-    disks:
-      - auto_delete: yes
-        boot: yes
-        initialize_params:
-          source_image: "projects/debian-cloud/global/images/family/debian-12"
-    network_interfaces:
-      - network: "default"
-        access_configs:
-          - name: "External NAT"
-            type: "ONE_TO_ONE_NAT"
+- name: Launch GCP VM
+  hosts: localhost
+  connection: local
+  gather_facts: no
+
+  tasks:
+    - name: Create VM in GCP
+      google.cloud.gcp_compute_instance:
+        auth_kind: serviceaccount
+        service_account_file: "{{ ansible_gcp }}"
+        project: "qwiklabs-gcp-00-29279b6605f5"
+        zone: "us-central1-a"
+        name: "jenkins-ansible-vm"
+        machine_type: "e2-micro"
+        disks:
+          - auto_delete: yes
+            boot: yes
+            initialize_params:
+              source_image: "projects/debian-cloud/global/images/family/debian-12"
+        network_interfaces:
+          - network: "default"
+            access_configs:
+              - name: "External NAT"
+                type: "ONE_TO_ONE_NAT"
