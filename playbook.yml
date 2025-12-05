@@ -2,12 +2,14 @@
   hosts: localhost
   connection: local
   gather_facts: no
+
   tasks:
-    - name: Create a VM instance in GCP
+
+    - name: Create VM in GCP
       google.cloud.gcp_compute_instance:
         auth_kind: serviceaccount
-        service_account_file: "/var/lib/jenkins/workspace/Terraform-GCP-Deploy/my-gcp-key.json"  # Hardcoded
-        project: "YOUR_PROJECT_ID"  # Replace with your GCP project ID
+        service_account_file: "{{ lookup('env', 'ansible-gcp') }}"
+        project: "YOUR_PROJECT_ID"
         zone: "us-central1-a"
         name: "jenkins-ansible-vm"
         machine_type: "e2-micro"
@@ -15,12 +17,12 @@
           - auto_delete: yes
             boot: yes
             initialize_params:
-              source_image: "debian-12"
+              source_image: "projects/debian-cloud/global/images/family/debian-12"
         network_interfaces:
           - network: default
             access_configs: [{}]
       register: vm
 
-    - name: Show VM details
+    - name: Show VM info
       debug:
         var: vm
