@@ -19,7 +19,8 @@
             initialize_params:
               source_image: "projects/debian-cloud/global/images/family/debian-12"
         network_interfaces:
-          - network: "global/networks/default"
+          - network:
+              self_link: "global/networks/default"
             access_configs:
               - {}
       register: vm
