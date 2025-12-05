@@ -9,7 +9,7 @@
       google.cloud.gcp_compute_instance:
         auth_kind: serviceaccount
         service_account_file: "{{ lookup('env', 'ansible-gcp') }}"
-        project: "YOUR_PROJECT_ID"
+        project: "qwiklabs-gcp-00-29279b6605f5"
         zone: "us-central1-a"
         name: "jenkins-ansible-vm"
         machine_type: "e2-micro"
